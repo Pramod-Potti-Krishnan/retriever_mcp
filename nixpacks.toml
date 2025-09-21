@@ -5,7 +5,7 @@ nixPkgs = ["python311", "python311Packages.pip", "python311Packages.setuptools",
 cmds = ["pip install --break-system-packages -r requirements.txt"]
 
 [start]
-cmd = "uvicorn main:app --host 0.0.0.0 --port $PORT"
+cmd = "python3.11 -m uvicorn main:app --host 0.0.0.0 --port $PORT"
 
 [variables]
 NIXPACKS_NO_DEFAULT_START_CMD = "true"
