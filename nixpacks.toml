@@ -3,9 +3,23 @@ nixPkgs = ["python311", "python311Packages.pip", "python311Packages.setuptools",
 
 [phases.install]
 cmds = [
+    "pip install --upgrade pip",
     "pip install --break-system-packages -r requirements.txt",
-    "python -m pip list | grep uvicorn || echo 'WARNING: uvicorn not found'"
+    "pip list | grep uvicorn || echo 'WARNING: uvicorn not found'",
+    "which python || echo 'Python path not found'",
+    "python --version"
+]
+
+[phases.build]
+cmds = [
+    "echo 'Build phase: Verifying installation...'",
+    "python -c 'import uvicorn; print(f\"uvicorn version: {uvicorn.__version__}\")'",
+    "python -c 'import fastapi; print(f\"fastapi version: {fastapi.__version__}\")'",
+    "ls -la"
 ]
 
 [start]
-cmd = "python -m uvicorn main:app --host 0.0.0.0 --port $PORT"
+cmd = "bash start.sh"
+
+[variables]
+PYTHONUNBUFFERED = "1"
