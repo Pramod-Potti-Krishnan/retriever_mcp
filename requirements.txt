@@ -1,32 +1,31 @@
-# Core MCP SDK
-mcp>=1.0.0
+# Core dependencies
+fastapi==0.104.1
+uvicorn[standard]==0.24.0
+pydantic==2.5.2
+python-dotenv==1.0.0
 
-# Async PostgreSQL client for vector operations
-asyncpg>=0.29.0
+# Database
+asyncpg==0.29.0
+pgvector==0.2.4
 
-# OpenAI client for embedding generation
-openai>=1.0.0
+# OpenAI for embeddings
+openai==1.6.1
 
-# Supabase client
-supabase>=2.0.0
+# Authentication
+PyJWT==2.8.0
+python-multipart==0.0.6
 
 # Caching
-cachetools>=5.3.0
+cachetools==5.3.2
 
-# Numerical operations for embeddings
-numpy>=1.24.0
+# Utilities
+numpy==1.24.3
+python-dateutil==2.8.2
 
-# Environment variable management
-python-dotenv>=1.0.0
+# Logging
+python-json-logger==2.0.7
 
-# Logging enhancements
-structlog>=24.1.0
-
-# Type hints support
-typing-extensions>=4.8.0
-
-# Async utilities
-aiofiles>=23.0.0
-
-# JSON Schema validation
-jsonschema>=4.20.0
+# Development (optional)
+pytest==7.4.3
+pytest-asyncio==0.21.1
+httpx==0.25.2
