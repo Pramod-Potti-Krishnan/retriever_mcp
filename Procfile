@@ -1,1 +1,1 @@
-web: python src/server_existing_db.py
+worker: python src/server_existing_db.py
