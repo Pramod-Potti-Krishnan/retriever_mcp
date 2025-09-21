@@ -65,7 +65,7 @@ async def lifespan(app: FastAPI):
 app = FastAPI(
     title="Presentation Retrieval API",
     description="AI-powered presentation content retrieval and generation API",
-    version="1.0.0",
+    version="1.0.1",
     lifespan=lifespan
 )
 
