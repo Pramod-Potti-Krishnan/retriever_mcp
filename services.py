@@ -456,9 +456,9 @@ class PresentationRetrievalService:
         FROM document_chunks
         WHERE document_id = ANY($1)
         AND (
-            content ~* r'\(\d{4}\)' OR
-            content ~* r'et al\.' OR
-            content ~* r'\[\d+\]' OR
+            content ~* '\\(\\d{4}\\)' OR
+            content ~* 'et al\\.' OR
+            content ~* '\\[\\d+\\]' OR
             metadata->>'has_citations' = 'true'
         )
         """
