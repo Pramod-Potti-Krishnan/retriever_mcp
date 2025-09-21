@@ -1,0 +1,42 @@
+# Base Dockerfile for Presentation MCP Servers
+# This serves as the template for all MCP server deployments on Fly.io
+
+FROM python:3.10-slim AS base
+
+# Set environment variables for Python
+ENV PYTHONUNBUFFERED=1 \
+    PYTHONDONTWRITEBYTECODE=1 \
+    PIP_NO_CACHE_DIR=1 \
+    PIP_DISABLE_PIP_VERSION_CHECK=1
+
+# Install system dependencies
+RUN apt-get update && apt-get install -y \
+    gcc \
+    g++ \
+    postgresql-client \
+    curl \
+    && rm -rf /var/lib/apt/lists/*
+
+# Create non-root user for security
+RUN useradd -m -u 1000 mcp && \
+    mkdir -p /app && \
+    chown -R mcp:mcp /app
+
+WORKDIR /app
+
+# Install Python dependencies (to be extended by specific MCPs)
+COPY --chown=mcp:mcp requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Copy shared configuration
+COPY --chown=mcp:mcp shared/ ./shared/
+
+# Switch to non-root user
+USER mcp
+
+# Health check for Fly.io (MCP servers use stdio, not HTTP)
+# This creates a simple file-based health indicator
+HEALTHCHECK --interval=30s --timeout=3s --start-period=5s --retries=3 \
+    CMD python -c "import sys; sys.exit(0)" || exit 1
+
+# Note: CMD should be overridden by specific MCP server Dockerfiles

@@ -1,1 +1,0 @@
-worker: python src/server_existing_db.py

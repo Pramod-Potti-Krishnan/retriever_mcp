@@ -1,0 +1,22 @@
+{
+  "mcp_servers": {
+    "document-retrieval": {
+      "command": "python",
+      "args": ["${HOME}/mcp-servers/document-retrieval-mcp/src/server.py"],
+      "env": {
+        "SUPABASE_URL": "${SUPABASE_URL}",
+        "SUPABASE_API_KEY": "${SUPABASE_API_KEY}",
+        "OPENAI_API_KEY": "${OPENAI_API_KEY}",
+        "EMBEDDING_MODEL": "text-embedding-3-small",
+        "VECTOR_DIMENSIONS": "1536",
+        "MAX_RESULTS_LIMIT": "20",
+        "DEFAULT_SIMILARITY_THRESHOLD": "0.7",
+        "DB_POOL_MIN_SIZE": "5",
+        "DB_POOL_MAX_SIZE": "20",
+        "CACHE_TTL": "300",
+        "CACHE_MAX_SIZE": "1000",
+        "LOG_LEVEL": "INFO"
+      }
+    }
+  }
+}
